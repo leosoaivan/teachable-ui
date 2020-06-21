@@ -3,7 +3,15 @@ import { AuthContext } from './contexts/AuthContext';
 import Login from './components/Login';
 
 const App = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth, loading } = useContext(AuthContext);
+
+  if (loading) {
+    console.log('LOADING');
+
+    return (
+      'LOADING'
+    );
+  }
 
   return (
     <div>
