@@ -32,21 +32,22 @@ const Login = () => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          const response = await fetch('http://localhost:3000/login', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user: values }),
-          });
+          try {
+            const response = await fetch('http://localhost:3000/login', {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ user: values }),
+            });
+            const token = await response.json();
 
-          const token = await response.json();
-
-          setAuthData(token);
-
-          console.log('RESPONSE: ', token);
-          setSubmitting(false);
+            setSubmitting(false);
+            setAuthData(token);
+          } catch (error) {
+            console.log('Error logging in');
+          }
         }}
       >
         {({ isSubmitting }) => (
