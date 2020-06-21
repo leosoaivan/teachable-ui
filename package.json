@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "formik": "^2.1.4",
     "jest-styled-components": "^7.0.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
@@ -20,7 +21,19 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:react/recommended",
+      "airbnb"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        0
+      ],
+      "react/jsx-fragments": [
+        0
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -33,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.2.0"
   }
 }
