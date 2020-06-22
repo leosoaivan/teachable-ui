@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
-import Login from './components/Login';
+import UnauthenticatedApp from './components/UnauthenticatedApp';
+// import Login from './components/Login';
 
 const App = () => {
   const { auth, loading } = useContext(AuthContext);
 
   if (loading) {
-    console.log('LOADING');
+    // console.log('LOADING');
 
     return (
       'LOADING'
@@ -18,7 +19,7 @@ const App = () => {
       { auth.data ? (
         'Hello'
       ) : (
-        <Login />
+        <UnauthenticatedApp />
       )}
     </div>
   );
