@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Proptypes from 'prop-types';
-import Login from '../Login';
+import Login from '../AuthForm/Login';
 
 const UnauthenticatedApp = () => {
   const [authState, setAuthState] = useState('logIn');
