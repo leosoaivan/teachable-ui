@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components/macro';
+import GlobalStyle from './styling/global';
+import theme from './styling/theme';
 import { AuthContext } from './contexts/AuthContext';
 import UnauthenticatedApp from './components/UnauthenticatedApp';
 
@@ -21,13 +23,16 @@ const App = () => {
   }
 
   return (
-    <Root>
-      { auth.data ? (
-        'Hello'
-      ) : (
-        <UnauthenticatedApp />
-      )}
-    </Root>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Root>
+        { auth.data ? (
+          'Hello'
+        ) : (
+          <UnauthenticatedApp />
+        )}
+      </Root>
+    </ThemeProvider>
   );
 };
 
