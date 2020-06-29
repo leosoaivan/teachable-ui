@@ -1,17 +1,22 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import {
   Formik,
   Form,
   Field,
   ErrorMessage,
 } from 'formik';
+import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
+
+  ${media.phone`
+    width: 100%;
+  `}
 `;
 
 const Login = () => {
