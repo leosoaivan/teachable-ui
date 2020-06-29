@@ -7,7 +7,6 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "formik": "^2.1.4",
-    "jest-styled-components": "^7.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -28,10 +27,26 @@
     ],
     "rules": {
       "react/jsx-filename-extension": [
-        0
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
       ],
+      "no-console": 0,
       "react/jsx-fragments": [
         0
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "src/setupTests.js",
+            "**/*.test.js"
+          ]
+        }
       ]
     }
   },
@@ -48,6 +63,9 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^18.2.0"
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint-config-airbnb": "^18.2.0",
+    "jest-styled-components": "^7.0.2"
   }
 }
