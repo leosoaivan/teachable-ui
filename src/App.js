@@ -1,7 +1,13 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import { AuthContext } from './contexts/AuthContext';
 import UnauthenticatedApp from './components/UnauthenticatedApp';
-// import Login from './components/Login';
+
+const Root = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
 
 const App = () => {
   const { auth, loading } = useContext(AuthContext);
@@ -15,13 +21,13 @@ const App = () => {
   }
 
   return (
-    <div>
+    <Root>
       { auth.data ? (
         'Hello'
       ) : (
         <UnauthenticatedApp />
       )}
-    </div>
+    </Root>
   );
 };
 

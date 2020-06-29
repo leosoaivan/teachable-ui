@@ -11,6 +11,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const Login = () => {
