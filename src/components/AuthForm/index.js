@@ -1,6 +1,5 @@
 import React from 'react';
-import Proptypes from 'prop-types';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Login from './Login';
 
 const Root = styled.div`
