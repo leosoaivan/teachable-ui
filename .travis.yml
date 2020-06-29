@@ -4,6 +4,9 @@ node_js:
 git:
   quiet: true
 cache: npm
+branches:
+  only:
+  - master
 script:
-  - npm test
+  - npm run test
   - npm run build
