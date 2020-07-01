@@ -8,11 +8,12 @@ import {
 } from 'formik';
 import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
+import CustomField from './CustomField';
 
 const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 75%;
 
   ${media.phone`
     width: 100%;
@@ -58,9 +59,19 @@ const Login = () => {
       >
         {({ isSubmitting }) => (
           <LoginForm>
-            <Field type="email" name="email" />
+            <Field
+              type="email"
+              name="email"
+              icon="envelope"
+              component={CustomField}
+            />
             <ErrorMessage name="email" component="div" />
-            <Field type="password" name="password" />
+            <Field
+              type="password"
+              name="password"
+              icon="key"
+              component={CustomField}
+            />
             <ErrorMessage name="password" component="div" />
             <button type="submit" disabled={isSubmitting}>
               Submit
