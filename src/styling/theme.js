@@ -9,12 +9,15 @@ const colors = {
   naplesYellow: '#FFE066',
   celadonBlue: '#247BA0',
   mountainMeadow: '#4CBD9B',
+  white: '#FFFFFF',
 };
 
 const thm = {
   colors,
   actionPrimary: colors.cobalt,
+  actionPrimaryActive: colors.celadonBlue,
   formField: colors.platinum,
+  lightText: colors.white,
 };
 
 export default thm;

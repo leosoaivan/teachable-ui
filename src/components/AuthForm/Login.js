@@ -9,6 +9,7 @@ import {
 import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
 import CustomField from './CustomField';
+import Button from '../Button';
 
 const LoginForm = styled(Form)`
   display: flex;
@@ -73,9 +74,12 @@ const Login = () => {
               component={CustomField}
             />
             <ErrorMessage name="password" component="div" />
-            <button type="submit" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+            >
               Submit
-            </button>
+            </Button>
           </LoginForm>
         )}
       </Formik>
