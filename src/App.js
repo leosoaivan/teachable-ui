@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import styled, { ThemeProvider } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import GlobalStyle from './styling/global';
-import theme from './styling/theme';
 import { AuthContext } from './contexts/AuthContext';
 import UnauthenticatedApp from './components/UnauthenticatedApp';
 
@@ -23,7 +22,7 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <React.Fragment>
       <GlobalStyle />
       <Root>
         { auth.data ? (
@@ -32,7 +31,7 @@ const App = () => {
           <UnauthenticatedApp />
         )}
       </Root>
-    </ThemeProvider>
+    </React.Fragment>
   );
 };
 

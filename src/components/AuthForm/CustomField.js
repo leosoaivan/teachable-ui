@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components/macro';
+import thm from '../../styling/theme';
 
 const Root = styled.div`
   display: flex;
   align-items: center;
   padding: 12px;
   margin: 0 0 24px 0;
-  background-color: ${(props) => props.theme.colors.platinum};
+  background-color: ${thm.formField};
   width: 100%;
 `;
 
 const StyledInput = styled.input`
   border: 0;
   margin-left: 12px;
-  background-color: ${(props) => props.theme.colors.platinum};
+  background-color: ${thm.formField};
   width: 100%;
 `;
 
@@ -47,8 +48,6 @@ const CustomField = ({
         placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        // onFocus={(e) => e.target.placeholder = ""}
-        // onBlur={(e) => e.target.placeholder = placeholder}
       />
     </Root>
   );
@@ -58,10 +57,12 @@ CustomField.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
+  icon: PropTypes.string,
   placeholder: PropTypes.string,
 };
 
 CustomField.defaultProps = {
+  icon: undefined,
   placeholder: undefined,
 };
 
