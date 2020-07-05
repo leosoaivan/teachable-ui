@@ -46,12 +46,13 @@ const textContent = {
   },
 };
 
-const Greeting = ({ action }) => {
+const Greeting = ({ action, onActionClick }) => {
   const {
     header,
     subHeader,
     actionLink,
   } = textContent[action];
+  const switchAction = action === 'signIn' ? 'signUp' : 'signIn';
 
   return (
     <Root>
@@ -61,7 +62,9 @@ const Greeting = ({ action }) => {
       <SubHeader>
         {subHeader}
         &nbsp;
-        <AuthActionLink>
+        <AuthActionLink
+          onClick={() => onActionClick(switchAction)}
+        >
           {actionLink}
         </AuthActionLink>
       </SubHeader>

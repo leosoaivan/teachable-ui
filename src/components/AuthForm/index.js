@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 const Root = styled.div`
   width: 500px;
@@ -8,9 +9,22 @@ const Root = styled.div`
 `;
 
 const AuthForm = () => {
+  const [authState, setAuthState] = useState('signIn');
+
   return (
     <Root>
-      <SignIn />
+      {
+        authState === 'signIn'
+          ? (
+            <SignIn
+              onActionClick={setAuthState}
+            />
+          ) : (
+            <SignUp
+              onActionClick={setAuthState}
+            />
+          )
+      }
     </Root>
   );
 };

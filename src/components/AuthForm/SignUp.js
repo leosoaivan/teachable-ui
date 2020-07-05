@@ -30,17 +30,17 @@ const LoginForm = styled(Form)`
   `}
 `;
 
-const SignIn = ({ onActionClick }) => {
+const SignUp = ({ onActionClick }) => {
   const { setAuthData } = useContext(AuthContext);
 
   return (
     <Root>
       <Greeting
-        action="signIn"
+        action="signUp"
         onActionClick={onActionClick}
       />
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: '', password: '', password_confirmation: '' }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -54,7 +54,7 @@ const SignIn = ({ onActionClick }) => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:3000/signup', {
               method: 'POST',
               mode: 'cors',
               headers: {
@@ -67,7 +67,7 @@ const SignIn = ({ onActionClick }) => {
             setSubmitting(false);
             setAuthData(token);
           } catch (error) {
-            console.log('Error logging in');
+            console.log('Error signing up');
           }
         }}
       >
@@ -87,6 +87,13 @@ const SignIn = ({ onActionClick }) => {
               component={Field}
             />
             <ErrorMessage name="password" component="div" />
+            <FormikField
+              type="password"
+              name="password confirmation"
+              icon="key"
+              component={Field}
+            />
+            <ErrorMessage name="password confirmation" component="div" />
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -100,4 +107,4 @@ const SignIn = ({ onActionClick }) => {
   );
 };
 
-export default SignIn;
+export default SignUp;
