@@ -11,6 +11,10 @@ import { AuthContext } from '../../contexts/AuthContext';
 import CustomField from './CustomField';
 import Button from '../Button';
 
+const Root = styled.div`
+  width: 100%;
+`;
+
 const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
@@ -21,11 +25,11 @@ const LoginForm = styled(Form)`
   `}
 `;
 
-const Login = () => {
+const SignIn = () => {
   const { setAuthData } = useContext(AuthContext);
 
   return (
-    <React.Fragment>
+    <Root>
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
@@ -83,8 +87,8 @@ const Login = () => {
           </LoginForm>
         )}
       </Formik>
-    </React.Fragment>
+    </Root>
   );
 };
 
-export default Login;
+export default SignIn;

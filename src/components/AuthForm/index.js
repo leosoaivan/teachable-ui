@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import media from '../../styling/media';
-import Login from './Login';
+import SignIn from './SignIn';
 
 const Root = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Root = styled.div`
 const AuthForm = () => {
   return (
     <Root>
-      <Login />
+      <SignIn />
     </Root>
   );
 };
