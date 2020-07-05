@@ -11,6 +11,9 @@ const Root = styled.div`
   margin: 0 0 24px 0;
   background-color: ${thm.formField};
   width: 100%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${(props) => (props.error ? thm.warning : thm.formField)}
 `;
 
 const StyledInput = styled.input`
@@ -23,6 +26,7 @@ const StyledInput = styled.input`
 
 const Field = ({
   field: { name },
+  form: { errors },
   ...props
 }) => {
   const {
@@ -41,7 +45,9 @@ const Field = ({
   };
 
   return (
-    <Root>
+    <Root
+      error={errors[name]}
+    >
       <FontAwesomeIcon icon={icon} />
       <StyledInput
         type="text"
@@ -57,6 +63,9 @@ const Field = ({
 Field.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    errors: PropTypes.object,
   }).isRequired,
   icon: PropTypes.string,
   placeholder: PropTypes.string,

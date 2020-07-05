@@ -22,6 +22,7 @@ const thm = {
   textLight: colors.white,
   textGrey: colors.battleshipGrey,
   text: colors.jet,
+  warning: colors.fireOpal,
 };
 
 export default thm;
