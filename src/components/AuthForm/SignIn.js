@@ -3,12 +3,12 @@ import styled from 'styled-components/macro';
 import {
   Formik,
   Form,
-  Field,
+  Field as FormikField,
   ErrorMessage,
 } from 'formik';
 import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
-import CustomField from './CustomField';
+import Field from './Field';
 import Button from '../Button';
 
 const Root = styled.div`
@@ -64,18 +64,18 @@ const SignIn = () => {
       >
         {({ isSubmitting }) => (
           <LoginForm>
-            <Field
+            <FormikField
               type="email"
               name="email"
               icon="envelope"
-              component={CustomField}
+              component={Field}
             />
             <ErrorMessage name="email" component="div" />
-            <Field
+            <FormikField
               type="password"
               name="password"
               icon="key"
-              component={CustomField}
+              component={Field}
             />
             <ErrorMessage name="password" component="div" />
             <Button

@@ -21,7 +21,7 @@ const StyledInput = styled.input`
   color: ${thm.textGrey};
 `;
 
-const CustomField = ({
+const Field = ({
   field: { name },
   ...props
 }) => {
@@ -54,7 +54,7 @@ const CustomField = ({
   );
 };
 
-CustomField.propTypes = {
+Field.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
@@ -62,9 +62,9 @@ CustomField.propTypes = {
   placeholder: PropTypes.string,
 };
 
-CustomField.defaultProps = {
+Field.defaultProps = {
   icon: undefined,
   placeholder: undefined,
 };
 
-export default CustomField;
+export default Field;
