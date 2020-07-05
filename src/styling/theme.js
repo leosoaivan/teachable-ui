@@ -10,15 +10,18 @@ const colors = {
   celadonBlue: '#247BA0',
   mountainMeadow: '#4CBD9B',
   white: '#FFFFFF',
+  jet: '#343434',
 };
 
 const thm = {
   colors,
   actionPrimary: colors.cobalt,
   actionPrimaryActive: colors.celadonBlue,
+  actionSecondary: colors.fireOpal,
   formField: colors.platinum,
   textLight: colors.white,
   textGrey: colors.battleshipGrey,
+  text: colors.jet,
 };
 
 export default thm;

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import {
   Formik,
@@ -8,10 +9,14 @@ import {
 } from 'formik';
 import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
+import Greeting from './Greeting';
 import Field from './Field';
 import Button from '../Button';
 
 const Root = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 `;
 
@@ -30,6 +35,9 @@ const SignIn = () => {
 
   return (
     <Root>
+      <Greeting
+        action="signIn"
+      />
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={(values) => {
