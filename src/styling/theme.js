@@ -17,7 +17,8 @@ const thm = {
   actionPrimary: colors.cobalt,
   actionPrimaryActive: colors.celadonBlue,
   formField: colors.platinum,
-  lightText: colors.white,
+  textLight: colors.white,
+  textGrey: colors.battleshipGrey,
 };
 
 export default thm;

@@ -18,6 +18,7 @@ const StyledInput = styled.input`
   margin-left: 12px;
   background-color: ${thm.formField};
   width: 100%;
+  color: ${thm.textGrey};
 `;
 
 const CustomField = ({
