@@ -23,11 +23,7 @@ const Root = styled.div`
 const LoginForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  width: 75%;
-
-  ${media.phone`
-    width: 100%;
-  `}
+  width: 100%;
 `;
 
 const SignUp = ({ onActionClick }) => {

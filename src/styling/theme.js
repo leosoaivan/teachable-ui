@@ -18,6 +18,7 @@ const thm = {
   actionPrimary: colors.cobalt,
   actionPrimaryActive: colors.celadonBlue,
   actionSecondary: colors.fireOpal,
+  boxShadow: colors.platinum,
   formField: colors.platinum,
   textLight: colors.white,
   textGrey: colors.battleshipGrey,
