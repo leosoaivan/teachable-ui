@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components/macro';
@@ -24,37 +24,27 @@ const StyledInput = styled.input`
   color: ${thm.textGrey};
 `;
 
-const Field = ({
-  field: { name },
-  form: { errors },
-  ...props
-}) => {
+const Field = ({ field, form, ...props }) => {
   const {
-    icon,
-  } = props;
-
-  const capitalizedName = name.toUpperCase();
-  const [placeholder, setPlaceholder] = useState(capitalizedName);
-
-  const handleFocus = () => {
-    setPlaceholder(null);
-  };
-
-  const handleBlur = () => {
-    setPlaceholder(capitalizedName);
-  };
+    name,
+    value,
+    onBlur,
+    onChange,
+  } = field;
+  const { errors } = form;
+  const { icon } = props;
 
   return (
     <Root
-      error={errors[name]}
+      error={errors[field[name]]}
     >
       <FontAwesomeIcon icon={icon} />
       <StyledInput
         type="text"
         name={name}
-        placeholder={placeholder}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        value={value}
+        onBlur={onBlur}
+        onChange={onChange}
       />
     </Root>
   );
@@ -63,17 +53,18 @@ const Field = ({
 Field.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
+    value: PropTypes.string,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
   }).isRequired,
   form: PropTypes.shape({
     errors: PropTypes.object,
   }).isRequired,
   icon: PropTypes.string,
-  placeholder: PropTypes.string,
 };
 
 Field.defaultProps = {
   icon: undefined,
-  placeholder: undefined,
 };
 
 export default Field;
