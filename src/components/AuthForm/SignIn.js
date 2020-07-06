@@ -7,7 +7,6 @@ import {
   Field as FormikField,
   ErrorMessage,
 } from 'formik';
-import media from '../../styling/media';
 import { AuthContext } from '../../contexts/AuthContext';
 import Greeting from './Greeting';
 import Field from './Field';
@@ -26,14 +25,14 @@ const LoginForm = styled(Form)`
   width: 100%;
 `;
 
-const SignIn = ({ onActionClick }) => {
+const SignIn = ({ onChangeAuthState }) => {
   const { setAuthData } = useContext(AuthContext);
 
   return (
     <Root>
       <Greeting
         action="signIn"
-        onActionClick={onActionClick}
+        changeAuthState={onChangeAuthState}
       />
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -94,6 +93,14 @@ const SignIn = ({ onActionClick }) => {
       </Formik>
     </Root>
   );
+};
+
+SignIn.propTypes = {
+  onChangeAuthState: PropTypes.func,
+};
+
+SignIn.defaultProps = {
+  onChangeAuthState: () => {},
 };
 
 export default SignIn;

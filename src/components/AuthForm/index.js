@@ -24,11 +24,11 @@ const AuthForm = () => {
         authState === 'signIn'
           ? (
             <SignIn
-              onActionClick={setAuthState}
+              onChangeAuthState={setAuthState}
             />
           ) : (
             <SignUp
-              onActionClick={setAuthState}
+              onChangeAuthState={setAuthState}
             />
           )
       }
