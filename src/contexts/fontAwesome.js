@@ -11,4 +11,6 @@ const registerIcons = () => {
   );
 };
 
+registerIcons();
+
 export default registerIcons;
