@@ -60,14 +60,12 @@ const UnauthenticatedApp = () => {
             }
           }}
         >
-          {({ isSubmitting }) => {
-            return (
-              <AuthForm
-                authState={authState}
-                isSubmitting={isSubmitting}
-              />
-            );
-          }}
+          {({ isSubmitting }) => (
+            <AuthForm
+              authState={authState}
+              isSubmitting={isSubmitting}
+            />
+          )}
         </Formik>
       </FormRoot>
     </Root>
