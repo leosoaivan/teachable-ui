@@ -1,28 +1,37 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Formik,
-} from 'formik';
 import styled from 'styled-components/macro';
-import thm from '../../styling/theme';
+import {
+  Form,
+} from 'formik';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-const AuthForm = ({ authState, isSubmitting }) => {
-  if (authState === 'signIn') {
-    return (
-      <SignIn
-        dataTestId="authform-sign-in"
-        isSubmitting={isSubmitting}
-      />
-    );
-  }
+const LoginForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
+const AuthForm = ({ authState, isSubmitting }) => {
+  const loginFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
   return (
-    <SignUp
-      dataTestId="authform-sign-up"
-      isSubmitting={isSubmitting}
-    />
+    <LoginForm
+      dataTestId={loginFormDataTestId}
+    >
+      {authState === 'signIn'
+        ? (
+          <SignIn
+            dataTestId="authform-sign-in"
+            isSubmitting={isSubmitting}
+          />
+        ) : (
+          <SignUp
+            dataTestId="authform-sign-up"
+            isSubmitting={isSubmitting}
+          />
+        )}
+    </LoginForm>
   );
 };
 
