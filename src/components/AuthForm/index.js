@@ -3,9 +3,11 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import {
   Form,
+  Field as FormikField,
+  ErrorMessage,
 } from 'formik';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import Field from './Field';
+import Button from '../Button';
 
 const LoginForm = styled(Form)`
   display: flex;
@@ -19,18 +21,38 @@ const AuthForm = ({ authState, isSubmitting }) => {
     <LoginForm
       dataTestId={loginFormDataTestId}
     >
-      {authState === 'signIn'
+      <FormikField
+        type="email"
+        name="email"
+        icon="envelope"
+        component={Field}
+      />
+      <ErrorMessage name="email" component="div" />
+      <FormikField
+        type="password"
+        name="password"
+        icon="key"
+        component={Field}
+      />
+      <ErrorMessage name="password" component="div" />
+      {authState === 'signUp'
         ? (
-          <SignIn
-            dataTestId="authform-sign-in"
-            isSubmitting={isSubmitting}
-          />
-        ) : (
-          <SignUp
-            dataTestId="authform-sign-up"
-            isSubmitting={isSubmitting}
-          />
-        )}
+          <React.Fragment>
+            <FormikField
+              type="password"
+              name="password_confirmation"
+              icon="key"
+              component={Field}
+            />
+            <ErrorMessage name="password_confirmation" component="div" />
+          </React.Fragment>
+        ) : null}
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+      >
+        Submit
+      </Button>
     </LoginForm>
   );
 };
