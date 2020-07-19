@@ -4,7 +4,11 @@ import {
   faKey,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(
-  faEnvelope,
-  faKey,
-);
+const registerIcons = () => {
+  library.add(
+    faEnvelope,
+    faKey,
+  );
+};
+
+export default registerIcons;

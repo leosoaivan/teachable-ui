@@ -30,7 +30,6 @@ const AuthActionLink = styled.span`
     cursor: pointer;
     text-decoration: underline;
   }
-
 `;
 
 const textContent = {
@@ -74,6 +73,7 @@ const Greeting = ({ action, changeAuthState }) => {
 
 Greeting.propTypes = {
   action: PropTypes.oneOf(['signIn', 'signUp']).isRequired,
+  changeAuthState: PropTypes.func.isRequired,
 };
 
 Greeting.defaultProps = {};

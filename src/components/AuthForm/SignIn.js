@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import {
-  Formik,
   Form,
   Field as FormikField,
   ErrorMessage,
 } from 'formik';
-import { AuthContext } from '../../contexts/AuthContext';
 import Field from './Field';
 import Button from '../Button';
 
@@ -16,8 +15,10 @@ const LoginForm = styled(Form)`
   width: 100%;
 `;
 
-const SignIn = ({ isSubmitting }) => (
-  <LoginForm>
+const SignIn = ({ dataTestId, isSubmitting }) => (
+  <LoginForm
+    data-test-id={dataTestId}
+  >
     <FormikField
       type="email"
       name="email"
@@ -40,5 +41,14 @@ const SignIn = ({ isSubmitting }) => (
     </Button>
   </LoginForm>
 );
+
+SignIn.propTypes = {
+  dataTestId: PropTypes.string,
+  isSubmitting: PropTypes.bool.isRequired,
+};
+
+SignIn.defaultProps = {
+  dataTestId: null,
+};
 
 export default SignIn;

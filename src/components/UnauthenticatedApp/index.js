@@ -3,14 +3,13 @@ import Proptypes from 'prop-types';
 import AuthForm from '../AuthForm';
 
 const UnauthenticatedApp = () => {
-  const [authState, setAuthState] = useState('logIn');
-
-  if (authState === 'signUp') {
-    return null;
-  }
+  const [authState, setAuthState] = useState('signIn');
 
   return (
-    <AuthForm />
+    <AuthForm
+      authState={authState}
+      setAuthState={setAuthState}
+    />
   );
 };
 

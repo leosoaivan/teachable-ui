@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
 import {
   Formik,
@@ -8,6 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import Greeting from './Greeting';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import authFormProps from './utils/authFormProps';
 
 const Root = styled.div`
   position: absolute;
@@ -26,60 +28,9 @@ const FormRoot = styled.div`
   width: 100%;
 `;
 
-const AuthForm = () => {
-  const [authState, setAuthState] = useState('signIn');
+const AuthForm = ({ authState, setAuthState }) => {
   const { setAuthData } = useContext(AuthContext);
-
-  const authFormProps = {
-    signIn: {
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      validate: (values) => {
-        const errors = {};
-        if (!values.email) {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Invalid email address';
-        }
-
-        if (!values.password) {
-          errors.password = 'Required';
-        }
-        return errors;
-      },
-      endpoint: 'http://localhost:3000/login',
-    },
-    signUp: {
-      initialValues: {
-        email: '',
-        password: '',
-        password_confirmation: '',
-      },
-      validate: (values) => {
-        const errors = {};
-        if (!values.email) {
-          errors.email = 'Required';
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Invalid email address';
-        }
-
-        if (!values.password) {
-          errors.password = 'Required';
-        } else if (values.password !== values.password_confirmation) {
-          errors.password = 'Passwords do not match';
-          errors.password_confirmation = 'Passwords do not match';
-        }
-        return errors;
-      },
-      endpoint: 'http://localhost:3000/signup',
-    },
-  };
+  const formProps = authFormProps[authState];
 
   return (
     <Root>
@@ -89,11 +40,11 @@ const AuthForm = () => {
       />
       <FormRoot>
         <Formik
-          initialValues={authFormProps[authState.initialValues]}
-          validate={authFormProps[authState.validate]}
+          initialValues={formProps.initialValues}
+          validate={formProps.validate}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              const response = await fetch(authFormProps.authState.endpoint, {
+              const response = await fetch(formProps.Formikendpoint, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -114,6 +65,7 @@ const AuthForm = () => {
             if (authState === 'signIn') {
               return (
                 <SignIn
+                  dataTestId="authform-sign-in"
                   isSubmitting={isSubmitting}
                 />
               );
@@ -121,6 +73,7 @@ const AuthForm = () => {
 
             return (
               <SignUp
+                dataTestId="authform-sign-up"
                 isSubmitting={isSubmitting}
               />
             );
@@ -129,6 +82,15 @@ const AuthForm = () => {
       </FormRoot>
     </Root>
   );
+};
+
+AuthForm.propTypes = {
+  authState: PropTypes.oneOf(['signIn', 'signUp']).isRequired,
+  setAuthState: PropTypes.func,
+};
+
+AuthForm.defaultProps = {
+  setAuthState: () => {},
 };
 
 export default AuthForm;
