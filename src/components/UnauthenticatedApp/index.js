@@ -1,13 +1,8 @@
-import React, { useState, useContext } from 'react';
-import {
-  Formik,
-} from 'formik';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import thm from '../../styling/theme';
-import { AuthContext } from '../../contexts/AuthContext';
-import Greeting from './Greeting';
-import authFormProps from './utils/authFormProps';
 import AuthForm from '../AuthForm';
+import Greeting from './Greeting';
 
 const Root = styled.div`
   position: absolute;
@@ -27,9 +22,7 @@ const FormRoot = styled.div`
 `;
 
 const UnauthenticatedApp = () => {
-  const { setAuthData } = useContext(AuthContext);
   const [authState, setAuthState] = useState('signIn');
-  const formProps = authFormProps[authState];
 
   return (
     <Root>
@@ -38,35 +31,9 @@ const UnauthenticatedApp = () => {
         changeAuthState={setAuthState}
       />
       <FormRoot>
-        <Formik
-          initialValues={formProps.initialValues}
-          validate={formProps.validate}
-          onSubmit={async (values, { setSubmitting }) => {
-            try {
-              const response = await fetch(formProps.Formikendpoint, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user: values }),
-              });
-              const token = await response.json();
-
-              setSubmitting(false);
-              setAuthData(token);
-            } catch (error) {
-              console.log('Error logging in');
-            }
-          }}
-        >
-          {({ isSubmitting }) => (
-            <AuthForm
-              authState={authState}
-              isSubmitting={isSubmitting}
-            />
-          )}
-        </Formik>
+        <AuthForm
+          authState={authState}
+        />
       </FormRoot>
     </Root>
   );

@@ -25,18 +25,16 @@ const ButtonText = styled.span`
   font-size: 16px;
 `;
 
-const Button = ({ type, disabled, children }) => {
-  return (
-    <Root
-      type={type}
-      disabled={disabled}
-    >
-      <ButtonText>
-        {children}
-      </ButtonText>
-    </Root>
-  );
-};
+const Button = ({ type, disabled, children }) => (
+  <Root
+    type={type}
+    disabled={disabled}
+  >
+    <ButtonText>
+      {children}
+    </ButtonText>
+  </Root>
+);
 
 Button.propTypes = {
   children: Proptypes.node.isRequired,

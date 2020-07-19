@@ -1,15 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import AuthForm from '..';
+import UnauthenticatedApp from '..';
 
-describe('AuthForm', () => {
+describe('UnauthenticatedApp', () => {
   it('Renders a sign in form', () => {
     const wrapper = mount(
-      <AuthForm
-        authState="signIn"
-      />,
+      <UnauthenticatedApp />,
     );
 
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
   });
 });
