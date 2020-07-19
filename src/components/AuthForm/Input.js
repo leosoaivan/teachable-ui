@@ -24,7 +24,7 @@ const StyledInput = styled.input`
   color: ${thm.textGrey};
 `;
 
-const Field = ({ field, form, ...props }) => {
+const Input = ({ field, form, ...props }) => {
   const {
     name,
     value,
@@ -50,7 +50,7 @@ const Field = ({ field, form, ...props }) => {
   );
 };
 
-Field.propTypes = {
+Input.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
     value: PropTypes.string,
@@ -63,8 +63,8 @@ Field.propTypes = {
   icon: PropTypes.string,
 };
 
-Field.defaultProps = {
+Input.defaultProps = {
   icon: undefined,
 };
 
-export default Field;
+export default Input;

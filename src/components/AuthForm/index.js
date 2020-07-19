@@ -8,7 +8,7 @@ import {
   ErrorMessage,
 } from 'formik';
 import { AuthContext } from '../../contexts/AuthContext';
-import Field from './Field';
+import Input from './Input';
 import Button from './Button';
 import authFormProps from './utils/authFormProps';
 
@@ -20,12 +20,12 @@ const LoginForm = styled(Form)`
 
 const AuthForm = ({ authState }) => {
   const { setAuthData } = useContext(AuthContext);
-  const loginFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
+  const authFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
   const formProps = authFormProps[authState];
 
   return (
     <Formik
-      data-test-id="test"
+      data-test-id={authFormDataTestId}
       initialValues={formProps.initialValues}
       validate={formProps.validate}
       onSubmit={async (values, { setSubmitting }) => {
@@ -48,21 +48,19 @@ const AuthForm = ({ authState }) => {
       }}
     >
       {({ isSubmitting }) => (
-        <LoginForm
-          data-test-id={loginFormDataTestId}
-        >
+        <LoginForm>
           <FormikField
             type="email"
             name="email"
             icon="envelope"
-            component={Field}
+            component={Input}
           />
           <ErrorMessage name="email" component="div" />
           <FormikField
             type="password"
             name="password"
             icon="key"
-            component={Field}
+            component={Input}
           />
           <ErrorMessage name="password" component="div" />
           {authState === 'signUp'
@@ -72,7 +70,7 @@ const AuthForm = ({ authState }) => {
                   type="password"
                   name="password_confirmation"
                   icon="key"
-                  component={Field}
+                  component={Input}
                 />
                 <ErrorMessage name="password_confirmation" component="div" />
               </React.Fragment>
