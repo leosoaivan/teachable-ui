@@ -55,7 +55,9 @@ const Greeting = ({ action, changeAuthState }) => {
 
   return (
     <Root>
-      <Header>
+      <Header
+        data-testid="authform-greeting-header"
+      >
         {header}
       </Header>
       <SubHeader>
