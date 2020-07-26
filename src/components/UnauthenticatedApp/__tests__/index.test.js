@@ -3,12 +3,13 @@ import { mount } from 'enzyme';
 import UnauthenticatedApp from '..';
 
 describe('UnauthenticatedApp', () => {
-  it('Initially renders a sign in form with a Greeting', () => {
+  it('Initially renders a sign in form', () => {
     const wrapper = mount(
       <UnauthenticatedApp />,
     );
 
-    console.log(wrapper.debug());
-    expect(wrapper.find('[data-testid="authform-greeting-header"]')).toHaveLength(1);
+    expect(wrapper.find('Greeting__Root')).toHaveLength(1);
+    expect(wrapper.find('Greeting__Header').text()).toMatch(/welcome back/i);
+    expect(wrapper.find('UnauthenticatedApp__FormRoot')).toHaveLength(1);
   });
 });
