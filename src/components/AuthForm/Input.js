@@ -36,7 +36,7 @@ const Input = ({ field, form, ...props }) => {
 
   return (
     <Root
-      error={errors[field[name]]}
+      error={errors[name]}
     >
       <FontAwesomeIcon icon={icon} />
       <StyledInput
