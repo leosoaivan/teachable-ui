@@ -8,7 +8,7 @@ const Root = styled.div`
   display: flex;
   align-items: center;
   padding: 12px;
-  margin: 0 0 24px 0;
+  margin-bottom: 48px;
   background-color: ${thm.formField};
   width: 100%;
   border-width: 2px;

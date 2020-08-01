@@ -10,6 +10,7 @@ import {
 import { AuthContext } from '../../contexts/AuthContext';
 import Input from './Input';
 import Button from './Button';
+import Error from './Error';
 import authFormProps from './utils/authFormProps';
 
 const LoginForm = styled(Form)`
@@ -55,14 +56,14 @@ const AuthForm = ({ authState }) => {
             icon="envelope"
             component={Input}
           />
-          <ErrorMessage name="email" component="div" />
+          <ErrorMessage name="email" component={Error} />
           <FormikField
             type="password"
             name="password"
             icon="key"
             component={Input}
           />
-          <ErrorMessage name="password" component="div" />
+          <ErrorMessage name="password" component={Error} />
           {authState === 'signUp'
             ? (
               <React.Fragment>
@@ -72,7 +73,7 @@ const AuthForm = ({ authState }) => {
                   icon="key"
                   component={Input}
                 />
-                <ErrorMessage name="password_confirmation" component="div" />
+                <ErrorMessage name="password_confirmation" component={Error} />
               </React.Fragment>
             ) : null}
           <Button
