@@ -13,7 +13,7 @@ const Root = styled.div`
   width: 100%;
   border-width: 2px;
   border-style: solid;
-  border-color: ${(props) => (props.error ? thm.warning : thm.formField)}
+  border-color: ${(props) => (props.borderColor ? thm.warning : thm.formField)};
 `;
 
 const StyledInput = styled.input`
@@ -25,26 +25,18 @@ const StyledInput = styled.input`
 `;
 
 const Input = ({ field, form, ...props }) => {
-  const {
-    name,
-    value,
-    onBlur,
-    onChange,
-  } = field;
-  const { errors } = form;
   const { icon } = props;
+  const borderColor = form.errors[field.name] && form.touched[field.name];
 
   return (
     <Root
-      error={errors[name]}
+      borderColor={borderColor}
     >
       <FontAwesomeIcon icon={icon} />
       <StyledInput
         type="text"
-        name={name}
-        value={value}
-        onBlur={onBlur}
-        onChange={onChange}
+        {...field}
+        {...form}
       />
     </Root>
   );

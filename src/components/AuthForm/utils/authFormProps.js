@@ -17,7 +17,7 @@ const authFormProps = {
       if (!values.password) {
         errors.password = 'Required';
       }
-      return errors;
+      return errors.email;
     },
     endpoint: 'http://localhost:3000/login',
   },
@@ -25,7 +25,7 @@ const authFormProps = {
     initialValues: {
       email: '',
       password: '',
-      password_confirmation: '',
+      passwordConfirmation: '',
     },
     validate: (values) => {
       const errors = {};

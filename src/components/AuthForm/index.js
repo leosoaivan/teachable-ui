@@ -24,11 +24,39 @@ const AuthForm = ({ authState }) => {
   const authFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
   const formProps = authFormProps[authState];
 
+  const validateEmail = (value) => {
+    console.log(value);
+
+    if (!value) {
+      return 'Required';
+    }
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+      return 'Invalid email address';
+    }
+    return null;
+  };
+
+  const validatePassword = (value) => {
+    if (!value) {
+      return 'Required';
+    }
+    return null;
+  };
+
+  const validatePasswordConfirmation = (values) => {
+    if (!values.passwordConfirmation) {
+      return 'Required';
+    }
+    if (values.password !== values.passwordConfirmation) {
+      return 'Passwords do not match';
+    }
+    return null;
+  };
+
   return (
     <Formik
       data-test-id={authFormDataTestId}
       initialValues={formProps.initialValues}
-      validate={formProps.validate}
       onSubmit={async (values, { setSubmitting }) => {
         try {
           const response = await fetch(formProps.Formikendpoint, {
@@ -48,13 +76,14 @@ const AuthForm = ({ authState }) => {
         }
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <LoginForm>
           <FormikField
             type="email"
             name="email"
             icon="envelope"
             component={Input}
+            validate={validateEmail}
           />
           <ErrorMessage name="email" component={Error} />
           <FormikField
@@ -62,6 +91,7 @@ const AuthForm = ({ authState }) => {
             name="password"
             icon="key"
             component={Input}
+            validate={validatePassword}
           />
           <ErrorMessage name="password" component={Error} />
           {authState === 'signUp'
@@ -69,11 +99,12 @@ const AuthForm = ({ authState }) => {
               <React.Fragment>
                 <FormikField
                   type="password"
-                  name="password_confirmation"
+                  name="passwordConfirmation"
                   icon="key"
                   component={Input}
+                  validate={() => validatePasswordConfirmation(values)}
                 />
-                <ErrorMessage name="password_confirmation" component={Error} />
+                <ErrorMessage name="passwordConfirmation" component={Error} />
               </React.Fragment>
             ) : null}
           <Button

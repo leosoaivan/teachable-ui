@@ -33,7 +33,7 @@ Error.propTypes = {
 };
 
 Error.defaultProps = {
-  children: null,
+  children: undefined,
 };
 
 export default Error;
