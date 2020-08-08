@@ -45,13 +45,18 @@ const textContent = {
   },
 };
 
-const Greeting = ({ action, changeAuthState }) => {
+const Greeting = ({ action, changeAuthState, setShouldFormReset }) => {
   const {
     header,
     subHeader,
     actionLink,
   } = textContent[action];
   const authState = action === 'signIn' ? 'signUp' : 'signIn';
+
+  const handleClick = () => {
+    setShouldFormReset(true);
+    changeAuthState(authState);
+  };
 
   return (
     <Root>
@@ -62,7 +67,7 @@ const Greeting = ({ action, changeAuthState }) => {
         {subHeader}
         &nbsp;
         <AuthActionLink
-          onClick={() => changeAuthState(authState)}
+          onClick={handleClick}
         >
           {actionLink}
         </AuthActionLink>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import {
@@ -19,8 +19,9 @@ const LoginForm = styled(Form)`
   width: 100%;
 `;
 
-const AuthForm = ({ authState }) => {
+const AuthForm = ({ authState, shouldFormReset, setShouldFormReset }) => {
   const { setAuthData } = useContext(AuthContext);
+  const formikRef = useRef();
   const authFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
   const formProps = authFormProps[authState];
 
@@ -53,10 +54,22 @@ const AuthForm = ({ authState }) => {
     return null;
   };
 
+  useEffect(() => {
+    if (shouldFormReset) {
+      formikRef.current.resetForm();
+      setShouldFormReset(false);
+    }
+  }, [shouldFormReset, setShouldFormReset]);
+
   return (
     <Formik
+      innerRef={formikRef}
       data-test-id={authFormDataTestId}
-      initialValues={formProps.initialValues}
+      initialValues={{
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+      }}
       onSubmit={async (values, { setSubmitting }) => {
         try {
           const response = await fetch(formProps.Formikendpoint, {

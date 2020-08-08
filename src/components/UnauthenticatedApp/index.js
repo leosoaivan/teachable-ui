@@ -23,16 +23,20 @@ const FormRoot = styled.div`
 
 const UnauthenticatedApp = () => {
   const [authState, setAuthState] = useState('signIn');
+  const [shouldFormReset, setShouldFormReset] = useState(false);
 
   return (
     <Root>
       <Greeting
         action={authState}
         changeAuthState={setAuthState}
+        setShouldFormReset={setShouldFormReset}
       />
       <FormRoot>
         <AuthForm
           authState={authState}
+          shouldFormReset={shouldFormReset}
+          setShouldFormReset={setShouldFormReset}
         />
       </FormRoot>
     </Root>
