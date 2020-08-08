@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/macro';
 import {
@@ -11,7 +16,11 @@ import { AuthContext } from '../../contexts/AuthContext';
 import Input from './Input';
 import Button from './Button';
 import Error from './Error';
-import authFormProps from './utils/authFormProps';
+import {
+  validateEmail,
+  validatePassword,
+  validatePasswordConfirmation,
+} from './utils/validators';
 
 const LoginForm = styled(Form)`
   display: flex;
@@ -21,38 +30,8 @@ const LoginForm = styled(Form)`
 
 const AuthForm = ({ authState, shouldFormReset, setShouldFormReset }) => {
   const { setAuthData } = useContext(AuthContext);
+  const [authFormEndpoint, setAuthFormEndpoint] = useState(null);
   const formikRef = useRef();
-  const authFormDataTestId = authState === 'signIn' ? 'authform-sign-in' : 'authform-sign-up';
-  const formProps = authFormProps[authState];
-
-  const validateEmail = (value) => {
-    console.log(value);
-
-    if (!value) {
-      return 'Required';
-    }
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-      return 'Invalid email address';
-    }
-    return null;
-  };
-
-  const validatePassword = (value) => {
-    if (!value) {
-      return 'Required';
-    }
-    return null;
-  };
-
-  const validatePasswordConfirmation = (values) => {
-    if (!values.passwordConfirmation) {
-      return 'Required';
-    }
-    if (values.password !== values.passwordConfirmation) {
-      return 'Passwords do not match';
-    }
-    return null;
-  };
 
   useEffect(() => {
     if (shouldFormReset) {
@@ -61,10 +40,19 @@ const AuthForm = ({ authState, shouldFormReset, setShouldFormReset }) => {
     }
   }, [shouldFormReset, setShouldFormReset]);
 
+  useEffect(() => {
+    if (authState && authState === 'signIn') {
+      setAuthFormEndpoint('http://localhost:3000/login');
+    }
+
+    if (authState && authState === 'signUp') {
+      setAuthFormEndpoint('http://localhost:3000/signup');
+    }
+  }, [authState]);
+
   return (
     <Formik
       innerRef={formikRef}
-      data-test-id={authFormDataTestId}
       initialValues={{
         email: '',
         password: '',
@@ -72,7 +60,7 @@ const AuthForm = ({ authState, shouldFormReset, setShouldFormReset }) => {
       }}
       onSubmit={async (values, { setSubmitting }) => {
         try {
-          const response = await fetch(formProps.Formikendpoint, {
+          const response = await fetch(authFormEndpoint, {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -134,6 +122,13 @@ const AuthForm = ({ authState, shouldFormReset, setShouldFormReset }) => {
 
 AuthForm.propTypes = {
   authState: PropTypes.oneOf(['signIn', 'signUp']).isRequired,
+  shouldFormReset: PropTypes.bool,
+  setShouldFormReset: PropTypes.func,
+};
+
+AuthForm.defaultProps = {
+  shouldFormReset: false,
+  setShouldFormReset: () => {},
 };
 
 export default AuthForm;

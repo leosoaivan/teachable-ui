@@ -79,8 +79,11 @@ const Greeting = ({ action, changeAuthState, setShouldFormReset }) => {
 Greeting.propTypes = {
   action: PropTypes.oneOf(['signIn', 'signUp']).isRequired,
   changeAuthState: PropTypes.func.isRequired,
+  setShouldFormReset: PropTypes.func,
 };
 
-Greeting.defaultProps = {};
+Greeting.defaultProps = {
+  setShouldFormReset: () => {},
+};
 
 export default Greeting;

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,12 +46,10 @@ const Input = ({ field, form, ...props }) => {
 Input.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.string,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
   }).isRequired,
   form: PropTypes.shape({
     errors: PropTypes.object,
+    touched: PropTypes.object,
   }).isRequired,
   icon: PropTypes.string,
 };
